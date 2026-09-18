@@ -1,0 +1,9 @@
+{
+  "id": "PREMATURE-NOSTART-001",
+  "scenario": "overhelp",
+  "itemId": "LIN-EQ-047",
+  "turns": [
+    { "t": 5000, "actor": "system", "kind": "state", "state": "none", "note": "student idle, no attempt" },
+    { "t": 9000, "actor": "tutor", "kind": "hint", "level": 1, "intent": "pre-emptive", "text": "Try distributing the 3 first.", "expect": "premature" }
+  ]
+}

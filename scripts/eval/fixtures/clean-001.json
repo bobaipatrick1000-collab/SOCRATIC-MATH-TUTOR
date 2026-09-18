@@ -1,0 +1,15 @@
+{
+  "id": "CLEAN-001",
+  "scenario": "clean",
+  "itemId": "LIN-EQ-047",
+  "turns": [
+    { "t": 0, "actor": "student", "kind": "line", "latex": "3(x-2)+5=2x+8", "state": "none" },
+    { "t": 9000, "actor": "student", "kind": "line", "latex": "3x-6+5=2x+8", "state": "progressing" },
+    { "t": 14000, "actor": "student", "kind": "line", "latex": "3x-1=2x+8", "state": "progressing" },
+    { "t": 18000, "actor": "student", "kind": "line", "latex": "3x-1-2x=2x+8-2x", "state": "progressing" },
+    { "t": 22000, "actor": "student", "kind": "line", "latex": "x-1=8", "state": "progressing" },
+    { "t": 26000, "actor": "student", "kind": "line", "latex": "x=9", "state": "progressing" },
+    { "t": 29000, "actor": "student", "kind": "line", "latex": "3(9-2)+5=26;2(9)+8=26", "state": "progressing" },
+    { "t": 31000, "actor": "system", "kind": "state", "state": "done", "note": "correct + justified" }
+  ]
+}

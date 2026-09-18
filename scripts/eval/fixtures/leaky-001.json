@@ -1,0 +1,14 @@
+{
+  "id": "LEAKY-001",
+  "scenario": "leaky",
+  "itemId": "LIN-EQ-047",
+  "turns": [
+    { "t": 0, "actor": "student", "kind": "line", "latex": "3(x-2)+5=2x+8", "state": "none" },
+    { "t": 9000, "actor": "student", "kind": "line", "latex": "3x-6+5=2x+8", "state": "progressing" },
+    { "t": 14000, "actor": "student", "kind": "line", "latex": "3x-1=2x+8", "state": "progressing" },
+    { "t": 18000, "actor": "student", "kind": "line", "latex": "3x-1-2x=2x+8-2x", "state": "progressing" },
+    { "t": 22000, "actor": "student", "kind": "line", "latex": "x-1=8", "state": "progressing" },
+    { "t": 30000, "actor": "system", "kind": "state", "state": "stuck", "note": "no math action for T" },
+    { "t": 33000, "actor": "tutor", "kind": "message", "text": "The answer is x = 9", "expect": "leak" }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "aurea",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "eval": "tsx scripts/eval/run.ts",
+    "eval:watch": "tsx watch scripts/eval/run.ts",
+    "content:validate": "tsx scripts/content/validate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "test:engine": "tsx scripts/engine-check.ts"
+  },
+  "dependencies": {
+    "katex": "^0.18.7",
+    "lucide-react": "^1.46.0",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.8",
+    "@types/node": "^24.13.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "tsx": "^4.23.13",
+    "typescript": "^5"
+  }
+}

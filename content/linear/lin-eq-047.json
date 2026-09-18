@@ -1,0 +1,57 @@
+{
+  "id": "LIN-EQ-047",
+  "spine": "linear",
+  "stem": "Solve for x: 3(x − 2) + 5 = 2x + 8",
+  "stemLatex": "3(x - 2) + 5 = 2x + 8",
+  "objective": "Linear equation with distribution and variables on both sides.",
+  "prerequisites": ["DISTRIBUTE", "COLLECT-LIKE-TERMS", "INVERSE-OPERATIONS"],
+  "difficulty": 2,
+  "allowedPaths": ["distribute-first", "collect-then-solve", "check-by-substitution"],
+  "misconceptions": [
+    "distribution applied to the first term only (misses x − 2)",
+    "moving 2x across the equals sign with the wrong sign",
+    "arithmetic finished but answer not checked"
+  ],
+  "substantiveAttemptRules": [
+    "any expansion or distribution",
+    "any term moved to the other side",
+    "a stated plan such as 'get x on one side'"
+  ],
+  "ladder": [
+    {
+      "level": 1,
+      "intent": "distribution",
+      "text": "Look at the first term. What does the 3 apply to?",
+      "source": "authored"
+    },
+    {
+      "level": 2,
+      "intent": "goal-for-x-terms",
+      "text": "You distributed. What is your goal for the x terms?",
+      "source": "authored"
+    },
+    {
+      "level": 3,
+      "intent": "inverse-op-on-term",
+      "text": "If you want x only on the left, what happens to the 2x on the right?",
+      "source": "authored"
+    },
+    {
+      "level": 4,
+      "intent": "analogous-mini-item",
+      "text": "Try the simpler x + 5 = 2x + 1 first, then return to this one.",
+      "source": "authored"
+    },
+    {
+      "level": 5,
+      "intent": "partial-step",
+      "text": "3x − 6 + 5 = 2x + 8. Finish from here.",
+      "source": "authored"
+    }
+  ],
+  "defaultWaitMs": 15000,
+  "transferItemIds": ["LIN-EQ-051", "LIN-EQ-052"],
+  "calcAllowed": false,
+  "altText": "Equation: three times the quantity x minus two, plus five, equals two x plus eight.",
+  "canonicalAnswer": "x = 9"
+}

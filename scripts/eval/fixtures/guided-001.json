@@ -1,0 +1,21 @@
+{
+  "id": "GUIDED-001",
+  "scenario": "guided",
+  "itemId": "LIN-EQ-047",
+  "turns": [
+    { "t": 0, "actor": "student", "kind": "line", "latex": "3(x-2)+5=2x+8", "state": "none" },
+    { "t": 10000, "actor": "student", "kind": "line", "latex": "3x-2+5=2x+8", "state": "progressing", "note": "error: distribution skipped on -2" },
+    { "t": 15000, "actor": "student", "kind": "line", "latex": "3x+3=2x+8", "state": "circling" },
+    { "t": 19000, "actor": "student", "kind": "line", "latex": "2x+3=2x+8", "state": "circling" },
+    { "t": 23000, "actor": "student", "kind": "line", "latex": "8=8", "state": "circling" },
+    { "t": 26000, "actor": "system", "kind": "state", "state": "stuck", "note": "same failed move repeated" },
+    { "t": 27000, "actor": "tutor", "kind": "hint", "level": 1, "intent": "distribution", "text": "Look at the first term. What does the 3 apply to?", "expect": "ok" },
+    { "t": 31000, "actor": "student", "kind": "line", "latex": "3x-6+5=2x+8", "state": "progressing" },
+    { "t": 36000, "actor": "student", "kind": "line", "latex": "3x-1=2x+8", "state": "progressing" },
+    { "t": 41000, "actor": "student", "kind": "line", "latex": "3x-1-2x=2x+8-2x", "state": "progressing" },
+    { "t": 46000, "actor": "student", "kind": "line", "latex": "x-1=8", "state": "progressing" },
+    { "t": 51000, "actor": "student", "kind": "line", "latex": "x=9", "state": "progressing" },
+    { "t": 55000, "actor": "student", "kind": "line", "latex": "3(9-2)+5=26;2(9)+8=26", "state": "progressing" },
+    { "t": 57000, "actor": "system", "kind": "state", "state": "done", "note": "guided solve" }
+  ]
+}

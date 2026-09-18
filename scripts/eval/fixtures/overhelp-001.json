@@ -1,0 +1,10 @@
+{
+  "id": "OVERHELP-001",
+  "scenario": "overhelp",
+  "itemId": "LIN-EQ-047",
+  "turns": [
+    { "t": 0, "actor": "student", "kind": "line", "latex": "3(x-2)+5=2x+8", "state": "none" },
+    { "t": 8000, "actor": "student", "kind": "line", "latex": "3x-6+5=2x+8", "state": "progressing" },
+    { "t": 12000, "actor": "tutor", "kind": "intervention", "text": "Just do: 3x-6+5=2x+8, then combine to 3x-1=2x+8, then x = 9", "expect": "leak" }
+  ]
+}
