@@ -29,7 +29,7 @@ function PracticeCard({ p, open, onOpen }: { p: GeneratedPracticeItem; open: boo
   const [done, setDone] = useState(false)
 
   const ladder = [p.hint.l1, p.hint.l2, p.hint.l3]
-  const grade = p.difficulty >= 3 ? "gold" : p.difficulty === 2 ? "" : "silver"
+  const grade = p.difficulty >= 3 ? "gold" : p.difficulty === 2 ? "steady" : "silver"
 
   return (
     <div className={`card practice-card ${open ? "is-open" : ""}`}>
@@ -74,7 +74,7 @@ function PracticeCard({ p, open, onOpen }: { p: GeneratedPracticeItem; open: boo
 
           <div className="pithint">
             {hint < 3 ? (
-              <button className="btn btn-quiet btn-sm" onClick={() => setHint((h) => Math.min(3, h + 1))}>
+              <button className="btn btn-quiet btn-sm" onClick={() => setHint((h) => (Math.min(3, h + 1) as 0|1|2|3))}>
                 <Lightbulb size={13} /> hint {hint === 0 ? "?" : hint === 1 ? "2" : "3"}
               </button>
             ) : (
