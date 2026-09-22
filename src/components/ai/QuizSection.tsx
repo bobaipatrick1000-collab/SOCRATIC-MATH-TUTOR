@@ -18,7 +18,7 @@ export function QuizSection({
 
   const answeredAll = answers.every((a) => a !== null)
 
-  const correct = answers.reduce((acc, a, i) => {
+  const correct = answers.reduce<number>((acc, a, i) => {
     if (a === null) return acc
     const q = items[i]
     if (q.kind === "mc") return acc + (a === q.correctIndex ? 1 : 0)
