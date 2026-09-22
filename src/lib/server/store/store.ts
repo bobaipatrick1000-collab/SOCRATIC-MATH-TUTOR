@@ -145,6 +145,47 @@ export function getSkill(studentId: string, skill: string): SkillWarmth | null {
   };
 }
 
+export interface GeneratedLessonRecord {
+  topicKey: string;
+  payload: string;
+  createdAt: number;
+  refreshedAt: number;
+}
+
+export function getGeneratedLesson(topicKey: string): GeneratedLessonRecord | null {
+  const row = getDb()
+    .prepare(
+      "SELECT topic_key, payload, created_at, refreshed_at FROM generated_lessons WHERE topic_key = ?",
+    )
+    .get(topicKey) as Row | undefined;
+  if (!row) return null;
+  return {
+    topicKey: String(row.topic_key),
+    payload: String(row.payload),
+    createdAt: Number(row.created_at),
+    refreshedAt: Number(row.refreshed_at),
+  };
+}
+
+export function putGeneratedLesson(topicKey: string, payload: string, now = Date.now()): void {
+  getDb()
+    .prepare(
+      `INSERT INTO generated_lessons (topic_key, payload, created_at, refreshed_at)
+       VALUES (?,?,?,?)
+       ON CONFLICT(topic_key) DO UPDATE SET
+         payload=excluded.payload,
+         refreshed_at=excluded.refreshed_at`,
+    )
+    .run(topicKey, payload, now, now);
+}
+
+export function listGeneratedLessonKeys(): string[] {
+  const rows = getDb()
+    .prepare("SELECT topic_key FROM generated_lessons ORDER BY refreshed_at DESC")
+    .all() as Row[];
+  return rows.map((r) => String(r.topic_key));
+}
+
 export function upsertSkill(studentId: string, s: Omit<SkillWarmth, "lastUpdated">, lastUpdated = Date.now()): void {
   getDb()
     .prepare(

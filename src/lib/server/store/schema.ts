@@ -58,4 +58,12 @@ CREATE TABLE IF NOT EXISTS skills (
   last_updated    INTEGER NOT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS idx_skills_student_skill ON skills(student_id, skill);
+
+CREATE TABLE IF NOT EXISTS generated_lessons (
+  topic_key     TEXT PRIMARY KEY,
+  payload       TEXT NOT NULL,
+  created_at    INTEGER NOT NULL,
+  refreshed_at  INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_generated_lessons_created ON generated_lessons(created_at);
 `;
