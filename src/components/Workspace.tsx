@@ -67,6 +67,76 @@ function makeRun(itemId: string, origin: string, nonce: number): Run | null {
   }
 }
 
+function packIdsOf(itemId: string): { slug: string; iid: string } | null {
+  if (!itemId.startsWith("pk:")) return null
+  const rest = itemId.slice(3)
+  const sep = rest.indexOf(":")
+  if (sep <= 0 || sep === rest.length - 1) return null
+  return { slug: rest.slice(0, sep), iid: rest.slice(sep + 1) }
+}
+
+interface PackLaunch {
+  ok: boolean
+  item?: {
+    kind: ItemKind
+    title: string
+    stem: string
+    stemTex?: string
+    skill: string
+    sourceId: string
+    alt: string
+    init?: string
+    target?: string
+    roots?: Record<string, string[]>
+    waitMs: number
+    sourceTitle: string
+    hint: HintLadder
+  }
+}
+
+async function loadPackRun(itemId: string, origin: string, nonce: number): Promise<Run | null> {
+  const ids = packIdsOf(itemId)
+  if (!ids) return null
+  let json: PackLaunch
+  try {
+    const res = await fetch(`/api/topics/${encodeURIComponent(ids.slug)}/pack/item/${encodeURIComponent(ids.iid)}`)
+    json = (await res.json()) as PackLaunch
+  } catch {
+    return null
+  }
+  const it = json?.item
+  if (!json.ok || !it) return null
+  const originItem: ContentItem = {
+    id: `${ids.slug}/${ids.iid}`,
+    topic: ids.slug,
+    skill: it.skill,
+    kind: it.kind,
+    title: it.title,
+    stem: it.stem,
+    stemTex: it.stemTex,
+    init: it.init,
+    target: it.target,
+    roots: it.roots,
+    hint: it.hint,
+    calcAllowed: false,
+    waitMs: it.waitMs,
+    difficulty: 1,
+    alt: it.alt,
+    tpl: "",
+    sourceId: it.sourceId,
+  }
+  return {
+    key: `pk:${ids.slug}:${ids.iid}:${nonce}`,
+    isTwin: false,
+    origin: originItem,
+    item: itemOfContent(originItem),
+    sourceId: it.sourceId,
+    seed: { roots: it.roots, init: it.init, target: it.target, origin },
+    baseWait: it.waitMs,
+    ladder: it.hint,
+  }
+}
+
 function makeTwinRun(src: ContentItem, nonce: number): Run | null {
   const twin = buildTwin(src.tpl, Date.now() + nonce * 1013, new Set())
   if (!twin) return null
@@ -111,6 +181,17 @@ export function Workspace({
   const router = useRouter()
   const [run, setRun] = useState<Run | null>(() => makeRun(itemId, origin, initialNonce))
   const [draft, setDraft] = useState("")
+
+  useEffect(() => {
+    if (run) return
+    let cancelled = false
+    void loadPackRun(itemId, origin, initialNonce).then((r) => {
+      if (!cancelled && r) setRun(r)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [itemId, origin, initialNonce, run])
   const [justError, setJustError] = useState<string | null>(null)
   const [justified, setJustified] = useState(false)
   const [now, setNow] = useState(0)
@@ -256,7 +337,7 @@ export function Workspace({
   const deleteLast = () => dispatch({ type: "delete-last" })
 
   const makeTwin = () => {
-    if (run.isTwin) return
+    if (run.isTwin || !run.origin.tpl) return
     const next = makeTwinRun(run.origin, state.twinCount + 1)
     if (!next) return
     recordedRef.current = false

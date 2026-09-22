@@ -12,7 +12,8 @@
     "eval:watch": "tsx watch scripts/eval/run.ts",
     "content:validate": "tsx scripts/content/validate.ts",
     "db:seed": "tsx scripts/seed.ts",
-    "test:engine": "tsx scripts/engine-check.ts"
+    "test:engine": "tsx scripts/engine-check.ts",
+    "test:pack": "tsx scripts/ai/pack-check.ts"
   },
   "dependencies": {
     "katex": "^0.18.7",

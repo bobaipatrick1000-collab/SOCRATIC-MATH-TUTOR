@@ -7,6 +7,7 @@ import { itemsByTopic, lessonBySlug, topicBySlug } from "@/lib/content/catalog"
 import { catLabel } from "@/lib/content/labels"
 import { TeX } from "@/components/TeX"
 import { LessonPanel } from "@/components/LessonPanel"
+import { TopicPackPanel } from "@/components/TopicPackPanel"
 
 export default function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
@@ -51,6 +52,8 @@ export default function TopicPage({ params }: { params: Promise<{ slug: string }
       </div>
 
       {lesson ? <LessonPanel lesson={lesson} /> : null}
+
+      <TopicPackPanel slug={slug} />
 
       <div className="section-title">
         <h2>Practice</h2>

@@ -66,4 +66,15 @@ CREATE TABLE IF NOT EXISTS generated_lessons (
   refreshed_at  INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_generated_lessons_created ON generated_lessons(created_at);
+
+CREATE TABLE IF NOT EXISTS topic_packs (
+  topic_id      TEXT PRIMARY KEY,
+  query         TEXT NOT NULL,
+  pack_json     TEXT NOT NULL,
+  source_hash   TEXT NOT NULL DEFAULT '',
+  fallback      INTEGER NOT NULL DEFAULT 0,
+  created_at    INTEGER NOT NULL,
+  updated_at    INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_topic_packs_updated ON topic_packs(updated_at);
 `;

@@ -7,7 +7,7 @@ export interface ChatMessage {
   content: string
 }
 
-export type AiKind = "lesson" | "scheme"
+export type AiKind = "lesson" | "scheme" | "pack"
 
 export interface AiCallOptions {
   kind: AiKind
